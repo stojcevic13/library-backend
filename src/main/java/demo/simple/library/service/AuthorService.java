@@ -3,7 +3,7 @@ package demo.simple.library.service;
 import demo.simple.library.mapper.AuthorMapper;
 import demo.simple.library.model.dto.author.AuthorDTORequest;
 import demo.simple.library.model.dto.author.AuthorDTOResponse;
-import demo.simple.library.model.entity.Author;
+import demo.simple.library.model.entity.book.Author;
 import demo.simple.library.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

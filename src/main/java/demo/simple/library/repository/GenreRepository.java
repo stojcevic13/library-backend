@@ -1,6 +1,6 @@
 package demo.simple.library.repository;
 
-import demo.simple.library.model.entity.Genre;
+import demo.simple.library.model.entity.book.Genre;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface GenreRepository extends JpaRepository<Genre, Integer> {

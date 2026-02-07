@@ -6,11 +6,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
 @SpringBootApplication
 public class LibraryApplication {
 
@@ -46,7 +41,7 @@ public class LibraryApplication {
         return args -> {
             System.out.println("=== Lista autora iz baze ===");
             autorRepository.findAll().forEach(autor -> {
-                System.out.println(autor.getId() + " " + autor.getName() + " " + autor.getSurname());
+                System.out.println(autor.getId() + " " + autor.getFirstName() + " " + autor.getLastName());
             });
         };
     }

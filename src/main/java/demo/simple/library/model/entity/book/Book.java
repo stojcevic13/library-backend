@@ -1,4 +1,5 @@
-package demo.simple.library.model.entity;
+package demo.simple.library.model.entity.book;
+import demo.simple.library.model.entity.request.Request;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -7,6 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
+@Table(name = "books")
 public class Book {
 
     @Id
@@ -30,5 +32,8 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    private List<Request> requests;
 
 }

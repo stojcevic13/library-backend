@@ -2,7 +2,7 @@ package demo.simple.library.mapper;
 
 import demo.simple.library.model.dto.author.AuthorDTORequest;
 import demo.simple.library.model.dto.author.AuthorDTOResponse;
-import demo.simple.library.model.entity.Author;
+import demo.simple.library.model.entity.book.Author;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;

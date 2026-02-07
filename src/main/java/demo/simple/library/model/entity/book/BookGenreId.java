@@ -1,4 +1,4 @@
-package demo.simple.library.model.entity;
+package demo.simple.library.model.entity.book;
 
 import jakarta.persistence.Embeddable;
 

@@ -1,4 +1,4 @@
-package demo.simple.library.model.entity;
+package demo.simple.library.model.entity.book;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -7,15 +7,17 @@ import java.util.List;
 
 @Data
 @Entity
-public class Author {
+@Table(name = "publishers")
+public class Publisher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
-    private String surname;
+    private String city;
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany (mappedBy = "publisher")
     private List<Book> books;
+
 }

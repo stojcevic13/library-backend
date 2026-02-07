@@ -20,13 +20,13 @@ public class TestSqlServerConnection {
 
             // Probaj da izvršiš jedan upit
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT TOP 5 * FROM author");
+            ResultSet rs = stmt.executeQuery("SELECT TOP 5 * FROM authors");
 
             while (rs.next()) {
                 System.out.println(
                         rs.getInt("id") + " " +
-                                rs.getString("name") + " " +
-                                rs.getString("surname")
+                                rs.getString("first_name") + " " +
+                                rs.getString("last_name")
                 );
             }
 
