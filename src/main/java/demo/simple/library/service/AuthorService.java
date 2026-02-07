@@ -5,7 +5,6 @@ import demo.simple.library.model.dto.author.AuthorDTORequest;
 import demo.simple.library.model.dto.author.AuthorDTOResponse;
 import demo.simple.library.model.entity.book.Author;
 import demo.simple.library.repository.AuthorRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,12 +12,14 @@ import java.util.List;
 @Service
 public class AuthorService {
 
-    @Autowired
-    private AuthorRepository authorRepository;
-
+    private final AuthorRepository authorRepository;
     private final AuthorMapper authorMapper = AuthorMapper.INSTANCE;
 
-    public List<AuthorDTOResponse> findAll(){
+    public AuthorService(AuthorRepository authorRepository) {
+        this.authorRepository = authorRepository;
+    }
+
+    public List<AuthorDTOResponse> findAll() {
         return authorRepository.findAll().stream().map(authorMapper::toDTOResponse).toList();
     }
 

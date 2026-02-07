@@ -6,7 +6,7 @@ import lombok.*;
 @Data
 public class AuthorDTORequest {
 
-    private String name;
-    private String surname;
+    private String firstName;
+    private String lastName;
 
 }
