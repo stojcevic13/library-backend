@@ -1,7 +1,8 @@
 package demo.simple.library.controller;
 
 import demo.simple.library.model.dto.user.UserDTO;
-import demo.simple.library.model.dto.user.UserLoginDTO;
+import demo.simple.library.model.dto.user.UserLoginDTORequest;
+import demo.simple.library.model.dto.user.UserLoginDTOResponse;
 import demo.simple.library.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,16 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserService userService;
+    @Autowired
+    private UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @GetMapping("/login")
-    public ResponseEntity<UserDTO> loginUser(@RequestBody UserLoginDTO userLoginDTO){
-        UserDTO userDTO = this.userService.loginUser(userLoginDTO);
-        return ResponseEntity.ok(userDTO);
+    public ResponseEntity<UserLoginDTOResponse> loginUser(@RequestBody UserLoginDTORequest userLoginDTO){
+        UserLoginDTOResponse userLoginDTOResponse = userService.loginUser(userLoginDTO);
+        return ResponseEntity.ok(userLoginDTOResponse);
     }
 
 }
