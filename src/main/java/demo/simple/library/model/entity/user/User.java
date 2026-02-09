@@ -8,6 +8,8 @@ import java.util.List;
 
 @Data
 @Entity
+//@DiscriminatorColumn(name="role", discriminatorType=DiscriminatorType.STRING)
+//@DiscriminatorValue("DEFAULT")
 @Table(name = "users")
 public class User {
 
@@ -17,9 +19,13 @@ public class User {
 
     private String firstName;
     private String lastName;
-    private String userName;
+    private String username;
     private String password;
+
+    @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Enumerated(EnumType.STRING)
     private AccountStatus status;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
