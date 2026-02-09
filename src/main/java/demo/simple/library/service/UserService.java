@@ -1,8 +1,10 @@
 package demo.simple.library.service;
 
 import demo.simple.library.mapper.UserMapper;
+import demo.simple.library.model.JwtUtil;
 import demo.simple.library.model.dto.user.UserDTO;
-import demo.simple.library.model.dto.user.UserLoginDTO;
+import demo.simple.library.model.dto.user.UserLoginDTORequest;
+import demo.simple.library.model.dto.user.UserLoginDTOResponse;
 import demo.simple.library.model.entity.user.User;
 import demo.simple.library.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,7 @@ public class UserService {
     private final UserMapper userMapper = UserMapper.INSTANCE;
 
 
-    public UserDTO loginUser(UserLoginDTO userLoginDTO) {
+    public UserLoginDTOResponse loginUser(UserLoginDTORequest userLoginDTO) {
         User user = userRepository.findByUsername(userLoginDTO.getUsername());
         if (user == null) {
             throw new RuntimeException("User not found!");
@@ -25,6 +27,8 @@ public class UserService {
         if (!user.getPassword().equals(userLoginDTO.getPassword())) {
             throw new RuntimeException("Incorrect password!");
         }
-        return userMapper.toUserDTO(user);
+
+        String token = JwtUtil.generateToken(user.getUsername(), user.getRole().name());
+        return new UserLoginDTOResponse(userMapper.toUserDTO(user), token);
     }
 }
