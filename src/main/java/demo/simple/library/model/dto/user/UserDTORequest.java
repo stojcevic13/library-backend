@@ -5,9 +5,8 @@ import demo.simple.library.model.entity.user.Role;
 import lombok.Data;
 
 @Data
-public class UserDTO {
+public class UserDTORequest {
 
-    private Integer id;
     private String firstName;
     private String lastName;
     private String username;
