@@ -8,8 +8,6 @@ import java.util.List;
 
 @Data
 @Entity
-//@DiscriminatorColumn(name="role", discriminatorType=DiscriminatorType.STRING)
-//@DiscriminatorValue("DEFAULT")
 @Table(name = "users")
 public class User {
 
