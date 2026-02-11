@@ -4,6 +4,7 @@ import demo.simple.library.model.dto.user.UserDTORequest;
 import demo.simple.library.model.dto.user.UserDTOResponse;
 import demo.simple.library.model.dto.user.UserLoginDTORequest;
 import demo.simple.library.model.dto.user.UserLoginDTOResponse;
+import demo.simple.library.model.entity.user.User;
 import demo.simple.library.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,12 +20,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+//    @PutMapping()
+//    public ResponseEntity<Void> updateUsers() {
+//        userService.updatePasswords();
+//        return ResponseEntity.noContent().build();  // 204 - NO CONTENT
+//    }
 
-    @GetMapping("/login")
-    public ResponseEntity<UserLoginDTOResponse> loginUser(@RequestBody UserLoginDTORequest userLoginDTO){
-        UserLoginDTOResponse userLoginDTOResponse = userService.loginUser(userLoginDTO);
-        return ResponseEntity.ok(userLoginDTOResponse);
-    }
 
     @GetMapping
     public ResponseEntity<List<UserDTOResponse>> findAll() {
