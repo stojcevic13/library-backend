@@ -17,13 +17,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    private final CustomAccessDeniedHandler accessDeniedHandler;
-    private final CustomAuthenticationEntryPoint authenticationEntryPoint;
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
     public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter, CustomAccessDeniedHandler accessDeniedHandler, CustomAuthenticationEntryPoint authenticationEntryPoint) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
-        this.accessDeniedHandler = accessDeniedHandler;
-        this.authenticationEntryPoint = authenticationEntryPoint;
+        this.customAccessDeniedHandler = accessDeniedHandler;
+        this.customAuthenticationEntryPoint = authenticationEntryPoint;
     }
 
     @Bean
@@ -43,14 +43,14 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // isključi CSRF za REST API
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll() // registracija/login javni
+                        .requestMatchers("/**").permitAll() // registracija/login javni
                         .anyRequest().authenticated()            // sve ostalo zahteva token
                 )
                 .exceptionHandling(ex -> ex
-                        .accessDeniedHandler(accessDeniedHandler)
-                        .authenticationEntryPoint(authenticationEntryPoint)
-                )
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                        .accessDeniedHandler(customAccessDeniedHandler)
+                        .authenticationEntryPoint(customAuthenticationEntryPoint)
+                );
+//                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 }

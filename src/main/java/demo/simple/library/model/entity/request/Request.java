@@ -22,6 +22,7 @@ public class Request {
     @JoinColumn(name = "book_id")
     private Book book;
 
+    @Enumerated(EnumType.STRING)
     private RequestStatus status;
 
 
