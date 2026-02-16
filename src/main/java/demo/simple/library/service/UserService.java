@@ -1,7 +1,7 @@
 package demo.simple.library.service;
 
 import demo.simple.library.mapper.UserMapper;
-import demo.simple.library.model.JwtUtil;
+import demo.simple.library.security.JwtUtil;
 import demo.simple.library.model.dto.user.UserDTORequest;
 import demo.simple.library.model.dto.user.UserDTOResponse;
 import demo.simple.library.model.dto.user.UserLoginDTORequest;
@@ -23,6 +23,8 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired JwtUtil jwtUtil;
+
     private final UserMapper userMapper = UserMapper.INSTANCE;
 
 
@@ -36,7 +38,12 @@ public class UserService {
             throw new RuntimeException("Incorrect password!");
         }
 
-        String token = JwtUtil.generateToken(user.getUsername(), user.getRole().name());
+        String token = jwtUtil.generateToken(
+                org.springframework.security.core.userdetails.User
+                        .withUsername(user.getUsername()).
+                        password(user.getPassword()).
+                        roles(user.getRole().name())
+                        .build());
         return new UserLoginDTOResponse(userMapper.toUserDTOResponse(user), token);
     }
 
